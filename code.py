@@ -4,27 +4,43 @@ from bs4 import BeautifulSoup
 fop_1 = '3112321491'
 company_1 = '19358784'
 
-link_query = f"https://youcontrol.com.ua/search/?q={company_1}"
-# link_fop = "https://youcontrol.com.ua/search/?q=3112321491"
+code_number = '3112321491'
 
-headers = {"sec-ch-ua": '"Google Chrome";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
-           "sec-ch-ua-mobile": "?0",
-           "sec-ch-ua-platform": "Windows",
-           "Upgrade-Insecure-Requests": "1",
-           "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"
-           }
-responce = requests.get(link_query, headers=headers).text
+if len(code_number) == 10:
+    link_query = f"https://youcontrol.com.ua/search/?q={code_number}"
+    headers = {"sec-ch-ua": '"Google Chrome";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
+               "sec-ch-ua-mobile": "?0",
+               "sec-ch-ua-platform": "Windows",
+               "Upgrade-Insecure-Requests": "1",
+               "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"
+               }
+    responce = requests.get(link_query, headers=headers).text
 
-soup = BeautifulSoup(responce, 'lxml')
+    soup = BeautifulSoup(responce, 'lxml')
 
-block = soup.find('div', id='catalog-company-fees')
+    block = soup.find('div', id='catalog-company-fees')
 
-mydivs = block.find_all("div", {"class": "seo-table-row"})[1]  #[4].text.strip()
+    mydivs = block.find_all("div", {"class": "seo-table-row"})[4]  # [4].text.strip()
 
-pdv_div = mydivs.find('div', class_='seo-table-col-2')
+    pdv_div = mydivs.find('div', class_='seo-table-col-2')
 
+    print(pdv_div)
+else:
+    link_query = f"https://youcontrol.com.ua/search/?q={code_number}"
+    headers = {"sec-ch-ua": '"Google Chrome";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
+               "sec-ch-ua-mobile": "?0",
+               "sec-ch-ua-platform": "Windows",
+               "Upgrade-Insecure-Requests": "1",
+               "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"
+               }
+    responce = requests.get(link_query, headers=headers).text
 
-print(pdv_div)
-# myclass = mydivs.find("div").text
+    soup = BeautifulSoup(responce, 'lxml')
 
-# print(mydivs)
+    block = soup.find('div', id='catalog-company-fees')
+
+    mydivs = block.find_all("div", {"class": "seo-table-row"})[1]  # [4].text.strip()
+
+    pdv_div = mydivs.find('div', class_='seo-table-col-2')
+
+    print(pdv_div)
