@@ -22,7 +22,7 @@ if len(code_number) == 10:
 
     mydivs = block.find_all("div", {"class": "seo-table-row"})[4]  # [4].text.strip()
 
-    pdv_div = mydivs.find('div', class_='seo-table-col-2')
+    pdv_div = mydivs.find('div', class_='seo-table-col-2').text.strip()
 
     print(pdv_div)
 else:
@@ -39,8 +39,12 @@ else:
 
     block = soup.find('div', id='catalog-company-fees')
 
-    mydivs = block.find_all("div", {"class": "seo-table-row"})[1]  # [4].text.strip()
+    mydivs = block.find("div", {"class": "seo-table"})
 
-    pdv_div = mydivs.find('div', class_='seo-table-col-2')
+    pdv_div = mydivs.find_all('div', class_='seo-table-row')[1]
 
-    print(pdv_div)
+    div_col_2 = pdv_div.find('div', class_='seo-table-col-2')
+
+    div_info_group = list(div_col_2.find_all('div', class_= 'info-group')[0].text.strip().split("  "))[0]
+
+    print(div_info_group)
