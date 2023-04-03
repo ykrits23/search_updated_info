@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 fop_1 = '3112321491'
 company_1 = '19358784'
 
-code_number = '3112321491'
+code_number = '19358784'
 
 if len(code_number) == 10:
     link_query = f"https://youcontrol.com.ua/search/?q={code_number}"
